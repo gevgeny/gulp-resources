@@ -1,4 +1,4 @@
-#[gulp](https://github.com/wearefractal/gulp)-glob-resources
+#[gulp](https://github.com/wearefractal/gulp)-resources
 
 > Extracts js/css/less resources from html
 
@@ -24,7 +24,7 @@ gulp.task('default', function () {
 });
 ```
 
-Running this task for such html
+Running this example task for such html:
 
 ```html
 
@@ -41,7 +41,7 @@ Running this task for such html
     </script>
 </head>
 <body>
-    <span>&quot;</span>
+    <p>gulp-resources example</p>
 </body>
 </html>
 ```
