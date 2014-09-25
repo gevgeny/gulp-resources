@@ -27,7 +27,7 @@
         "lodash": "2.4.1",
         "cheerio": "0.15.0",
         "glob" : "4.0.5",
-        "gulp-util": "2.2.0",
+        "gulp-util": "3.0.1",
         "through2" : "0.6.1"
     },
     "devDependencies": {
