@@ -9,14 +9,14 @@ var expandResources = function (resourcePath, opts, contentDir) {
     var paths = [], resources = undefined,
         dirs = [contentDir];
 
-    if (typeof opts.base === 'string') {
-        dirs.push(path.resolve(opts.base));
-    } else if (Array.isArray(opts.base)) {
+    if (typeof opts.cwd === 'string') {
+        dirs.push(path.resolve(opts.cwd));
+    } else if (Array.isArray(opts.cwd)) {
         dirs.forEach(function (dir) { dirs.push(path.resolve(dir)); });
-    } else if (opts.base === undefined) {
+    } else if (opts.cwd === undefined) {
 
     } else {
-        throw new gutil.PluginError('gulp-resources', 'Unknown type of "base".');
+        throw new gutil.PluginError('gulp-resources', 'Unknown type of "cwd".');
     }
 
     _.forEach(dirs, function (dir) {

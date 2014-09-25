@@ -4,7 +4,7 @@ var gulp = require('gulp'),
 
 gulp.task('resources', function () {
     return gulp.src('./test/cases/**/*.html')
-        .pipe(resources({ base: 'test/cases' }))
+        .pipe(resources({ cwd: 'test/cases' }))
         .pipe(gulp.dest('./test/tmp'));
 });
 
