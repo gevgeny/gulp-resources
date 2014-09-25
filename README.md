@@ -2,7 +2,7 @@
 
 > Extracts js/css/less resources from html
 
-## Installation
+## Usage
 
 ```
 npm install --save-dev gulp-resources
@@ -56,6 +56,27 @@ tmp
     ├─script1.js
     └─script2.js
 ```
+
+## API
+
+### resources(options)
+
+Returns a stream with the concatenated asset files from the build blocks inside the HTML.
+
+#### options.cwd
+
+Type: `String` or `Array`  
+Default: `none`  
+
+Without this value only working directory of processing HTML file is used to search resources. 
+Specifying this property allows you to add another location/locations to search for resources files if they were not found with HTML's working directory.
+
+#### options.skipNotExistingFiles
+Type: `Boolean` 
+Default: `false`
+
+Specify whether to skip errors when resource files were not found.
+
 ## License
 
 [MIT](http://en.wikipedia.org/wiki/MIT_License) @ Eugene Gluhotorenko
