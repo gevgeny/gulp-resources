@@ -99,7 +99,7 @@ gulp.task('default', function () {
 
 ### resources(options)
 
-Returns a stream with the concatenated asset files from the build blocks inside the HTML.
+Returns a stream with the extracted resource files.
 
 #### options.cwd
 
