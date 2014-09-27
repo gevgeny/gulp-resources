@@ -77,7 +77,7 @@ tmp
 </html>
 ```
 
-You can use built-in options (see (API)[https://github.com/gevgeny/gulp-resources#optionsjs]) to filter resources but if you want to run `gulp-resources` once so good solution is to use the [gulp-if](https://github.com/robrich/gulp-if) plugin:
+You can use built-in options (see [API](#optionsjs) to filter resources but if you want to run `gulp-resources` once so good solution is to use the [gulp-if](https://github.com/robrich/gulp-if) plugin:
 
 ```js
 
