@@ -1,6 +1,6 @@
 #[gulp](https://github.com/wearefractal/gulp)-resources
 
-> Extracts js/css/less resources from html
+> Extracts js/css/less and other resources from html
 
 ## Installation
 
