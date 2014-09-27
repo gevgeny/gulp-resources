@@ -6,13 +6,13 @@ var cheerio = require('cheerio'),
     glob = require('glob');
 
 var expandResources = function (resourcePath, opts, contentDir) {
-    var paths = [], resources = undefined,
+    var resources = undefined,
         dirs = [contentDir];
 
     if (typeof opts.cwd === 'string') {
         dirs.push(path.resolve(opts.cwd));
     } else if (Array.isArray(opts.cwd)) {
-        dirs.forEach(function (dir) { dirs.push(path.resolve(dir)); });
+        opts.cwd.forEach(function (dir) { dirs.push(path.resolve(dir)); });
     } else if (opts.cwd === undefined) {
 
     } else {

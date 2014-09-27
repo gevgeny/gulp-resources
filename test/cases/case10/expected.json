@@ -8,5 +8,7 @@
     "// script2.js content",
     "// script3.js content",
     "// script4.js content",
-    "// script5.js content"
+    "// script5.js content",
+    "// custom-cwd-script1.js content",
+    "// custom-cwd-script2.js content"
 ]

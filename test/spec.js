@@ -101,6 +101,28 @@ describe('gulp-resources', function () {
                 cb();
             });
     });
+    it('should search resources in opts.cwd directory as well', function (cb) {
+        var actual = [], expected = getExpected('case9');
+
+        gulp.src('./test/cases/case9/content.html')
+            .pipe(resources({ src: false, cwd: './test/cases/case9/another-dir' }))
+            .pipe(toArray(actual))
+            .on('finish', function () {
+                assert.deepEqual(actual, expected);
+                cb();
+            });
+    });
+    it('should search resources in opts.cwd directories as well', function (cb) {
+        var actual = [], expected = getExpected('case10');
+
+        gulp.src('./test/cases/case10/content.html')
+            .pipe(resources({ src: false, cwd: ['./test/cases/case10/another-dir1','./test/cases/case10/another-dir2'] }))
+            .pipe(toArray(actual))
+            .on('finish', function () {
+                assert.deepEqual(actual, expected);
+                cb();
+            });
+    });
 });
 
 //fs.writeFileSync('./test/cases/case1/expected.json', JSON.stringify(actual, null, 4));

@@ -1,0 +1,1 @@
+// custom-cwd-script2.js content
