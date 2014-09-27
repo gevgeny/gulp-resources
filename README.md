@@ -2,13 +2,13 @@
 
 > Extracts js/css/less resources from html
 
-## Usage
+## Installation
 
 ```
 npm install --save-dev gulp-resources
 ```
 
-## Information
+## Usage
 
 With this gulp plugin you can extract js/css/less resources from your html and pipe them to other plugins.
 
@@ -55,6 +55,44 @@ tmp
 └─scripts
     ├─script1.js
     └─script2.js
+```
+
+## Features and tips
+
+gulp-resources considers every resource entry as a [glob](https://github.com/isaacs/node-glob) so you can do such thing in your HTML:
+
+```html
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+
+	<link href="css/**/*.css" rel="stylesheet" type="text/css">
+    <script src="scripts/**/*.js"></script>
+</head>
+<body>
+    <p>gulp-resources example</p>
+</body>
+</html>
+```
+
+You can use built-in options (see API section) to filter resources but if you want to run gulp-resources once so good solution is to use the [gulp-if](https://github.com/robrich/gulp-if) plugin:
+
+```js
+
+var gulp = require('gulp'),
+    gif = require('gulp-if'),
+    concat = require('gulp-concat'),
+    resources = require('glob-resources');
+
+gulp.task('default', function () {
+    return gulp.src('./template.html')
+        .pipe(resources())
+        .pipe(gif('**/*.js', concat('concat.js')))
+        .pipe(gif('**/*.css', concat('concat.css')))
+        .pipe(gulp.dest('./tmp'));
+});
 ```
 
 ## API
