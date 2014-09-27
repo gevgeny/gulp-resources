@@ -1,11 +1,22 @@
 var through = require('through2'),
     gutil = require('gulp-util'),
-    resources = require('./libs/resources'),
     path = require('path'),
-    fs = require('fs');
+    fs = require('fs'),
+
+    resources = require('./libs/resources');
 
 module.exports = function (opts) {
+    var defineOpt = function (optName, defaultValue) {
+        opts[optName] = optName in opts ? opts[optName] : defaultValue;
+    };
+
     opts = opts || {};
+    defineOpt('js', true);
+    defineOpt('css', true);
+    defineOpt('less', true);
+    defineOpt('favicon', false);
+    defineOpt('src', true);
+    defineOpt('skipNotExistingFiles', false);
 
     return through.obj(function (file, enc, cb) {
         var content,
@@ -33,6 +44,9 @@ module.exports = function (opts) {
                     contents: fs.readFileSync(resource)
                 }));
             });
+        }
+        if (opts.src) {
+            this.push(file);
         }
         cb();
     });

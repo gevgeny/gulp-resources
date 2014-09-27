@@ -40,10 +40,16 @@ module.exports = function (content, opts, contentDir) {
     $('script,link').each(function (i, element) {
         var $element = $(element);
 
-        if ($element.is('script') && $element.attr('src')) {
+        if (opts.js && $element.is('script') && $element.attr('src')) {
             resources = resources.concat(expandResources($element.attr('src'), opts, contentDir));
         }
-        if ($element.is('link') && $element.attr('href')) {
+        if (opts.css && $element.is('link') && ($element.attr('href') || '').substr(-4) === ".css") {
+            resources = resources.concat(expandResources($element.attr('href'), opts, contentDir));
+        }
+        if (opts.less && $element.is('link') && ($element.attr('href') || '').substr(-5) === ".less") {
+            resources = resources.concat(expandResources($element.attr('href'), opts, contentDir));
+        }
+        if (opts.favicon && $element.is('link') && ($element.attr('rel') || '') === "icon") {
             resources = resources.concat(expandResources($element.attr('href'), opts, contentDir));
         }
     });
