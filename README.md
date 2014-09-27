@@ -15,7 +15,7 @@ With this gulp plugin you can extract js/css/less resources from your html and p
 ```js
 
 var gulp = require('gulp'),
-    resources = require('glob-resources');
+    resources = require('gulp-resources');
 
 gulp.task('default', function () {
     return gulp.src('./template.html')
@@ -84,7 +84,7 @@ You can use built-in options (see [API](#optionsjs)) to filter resources but if 
 var gulp = require('gulp'),
     gif = require('gulp-if'),
     concat = require('gulp-concat'),
-    resources = require('glob-resources');
+    resources = require('gulp-resources');
 
 gulp.task('default', function () {
     return gulp.src('./template.html')
