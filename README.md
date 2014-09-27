@@ -99,7 +99,7 @@ gulp.task('default', function () {
 
 ### resources(options)
 
-Returns a stream with the extracted resource files.
+Returns a stream with extracted resources.
 
 #### options.cwd
 
