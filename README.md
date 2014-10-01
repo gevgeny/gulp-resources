@@ -140,7 +140,7 @@ gulp.task('default', function () {
 
 After running the task you will have such html:
 
-```js
+```html
 
 <!DOCTYPE html>
 <html>
