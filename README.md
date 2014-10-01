@@ -141,6 +141,7 @@ gulp.task('default', function () {
 After running the task you will have such html:
 
 ```js
+
 <!DOCTYPE html>
 <html>
 <head lang="en">
