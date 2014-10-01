@@ -133,7 +133,7 @@ gulp.task('default', function () {
         .pipe(resources())
         .pipe(gif('**/*.js', concat('all.js')))
         .pipe(gif('**/*.js', uglify()))
-        .pipe(gif('**/*.html', $.replace(/<!--startjs-->[^]+<!--endjs-->/, '<script src="js/all.js"></script>')))
+        .pipe(gif('**/*.html', replace(/<!--startjs-->[^]+<!--endjs-->/, '<script src="js/all.js"></script>')))
         .pipe(gulp.dest('./tmp'));
 });
 ```
