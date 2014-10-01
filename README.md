@@ -95,6 +95,64 @@ gulp.task('default', function () {
 });
 ```
 
+Mostly you also need to replace all the resources references with concatenated and/or uglified version. Here the [gulp-replace](https://github.com/lazd/gulp-replace) can help:
+
+```html
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    
+    <!--startjs-->
+    <script src="scripts/vendor/script1.js"></script>
+    <script src="scripts/vendor/script2.js"></script>
+    <script src="scripts/vendor/script3.js"></script>
+    
+    <script src="scripts/core.js"></script>
+    <script src="scripts/modules/**/*.js"></script>
+    <!--endjs-->
+</head>
+<body>
+    <p>gulp-resources example</p>
+</body>
+</html>
+```
+
+```js
+
+var gulp = require('gulp'),
+    gif = require('gulp-if'),
+    concat = require('gulp-concat'),
+    uglify = require('gulp-uglify'),
+    replace = require('gulp-replace'),
+    resources = require('gulp-resources');
+
+gulp.task('default', function () {
+    return gulp.src('./template.html')
+        .pipe(resources())
+        .pipe(gif('**/*.js', concat('all.js')))
+        .pipe(gif('**/*.js', uglify()))
+        .pipe(gif('**/*.html', $.replace(/<!--startjs-->[^]+<!--endjs-->/, '<script src="js/all.js"></script>')))
+        .pipe(gulp.dest('./tmp'));
+});
+```
+
+After running the task you will have such html:
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    
+    <script src="js/all.js"></script>
+</head>
+<body>
+    <p>gulp-resources example</p>
+</body>
+</html>
+```
+
 ## API
 
 ### resources(options)
