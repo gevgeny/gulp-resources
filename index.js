@@ -40,6 +40,7 @@ module.exports = function (opts) {
                 that.push(new gutil.File({
                     base: file.base,
                     cwd: file.cwd,
+                    stat: file.stat,
                     path: resource,
                     contents: fs.readFileSync(resource)
                 }));
