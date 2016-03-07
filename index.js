@@ -37,11 +37,18 @@ module.exports = function (opts) {
             }
 
             extraсtedResources.forEach(function (resource) {
+                var queryIdx = resource.indexOf('?'),
+                    query = "";
+
+                if (queryIdx > -1) {
+                    query = resource.substr(queryIdx);
+                    resource = resource.substring(0, queryIdx);
+                }
                 that.push(new gutil.File({
                     base: file.base,
                     cwd: file.cwd,
                     stat: file.stat,
-                    path: resource,
+                    path: resource + query,
                     contents: fs.readFileSync(resource)
                 }));
             });
