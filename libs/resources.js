@@ -7,7 +7,14 @@ var cheerio = require('cheerio'),
 
 var expandResources = function (resourcePath, opts, contentDir) {
     var resources = undefined,
-        dirs = [contentDir];
+        dirs = [contentDir],
+        queryIdx = resourcePath.indexOf('?'),
+        query = "";
+
+    if (queryIdx > -1) {
+       query = resourcePath.substr(queryIdx);
+       resourcePath = resourcePath.substring(0, queryIdx);
+    }
 
     if (typeof opts.cwd === 'string') {
         dirs.push(path.resolve(opts.cwd));
@@ -22,7 +29,7 @@ var expandResources = function (resourcePath, opts, contentDir) {
     _.forEach(dirs, function (dir) {
         resources = glob.sync(resourcePath, { cwd : dir });
         if (resources.length) {
-            resources = resources.map(function (resource) { return path.join(dir, resource) });
+            resources = resources.map(function (resource) { return path.join(dir, resource) + query });
             return false;
         }
     });
