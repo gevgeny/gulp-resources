@@ -235,7 +235,7 @@ Specify whether to skip errors when resource files were not found.
 Type: `Boolean` 
 Default: `false`
 
-Strip query from `file.path` if exists. When true, `<script src="myscript.js?v3.0"></script>` will produce this vinyl file:
+Strip query from `file.path` if exists. When `false`, `<script src="myscript.js?v3.0"></script>` will produce this vinyl file:
 ```javascript
 {
     base: '/',
@@ -246,7 +246,7 @@ Strip query from `file.path` if exists. When true, `<script src="myscript.js?v3.
 }
 ```
 
-When `false`, it will produce this one:
+When `true`, it will produce this one:
 ```javascript
 {
     base: '/',
