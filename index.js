@@ -17,6 +17,7 @@ module.exports = function (opts) {
     defineOpt('favicon', false);
     defineOpt('src', true);
     defineOpt('skipNotExistingFiles', false);
+    defineOpt('truePaths', false);
 
     return through.obj(function (file, enc, cb) {
         var content,
@@ -48,7 +49,7 @@ module.exports = function (opts) {
                     base: file.base,
                     cwd: file.cwd,
                     stat: file.stat,
-                    path: resource + query,
+                    path: resource + (opts.truePaths ? "" : query),
                     contents: fs.readFileSync(resource)
                 }));
             });
