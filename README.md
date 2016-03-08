@@ -173,7 +173,7 @@ It also supports resources with query parameters:
 </html>
 ```
 
-In this case the vinyl files path property will contain query parameters, so if you need to read the file from `file.path` property, remove the query parameters before:
+When `truePaths` option is false (default), vinyl files path property will contain query parameters, so if you need to read the file from `file.path` property, remove the query parameters before:
 
 ```javascript
 function readFileContents(file) {
@@ -230,6 +230,32 @@ Type: `Boolean`
 Default: `false`
 
 Specify whether to skip errors when resource files were not found.
+
+#### options.truePaths
+Type: `Boolean` 
+Default: `false`
+
+Strip query from `file.path` if exists. When true, `<script src="myscript.js?v3.0"></script>` will produce this vinyl file:
+```javascript
+{
+    base: '/',
+    cwd: '/',
+    stat: Object,
+    path: '/myscript.js?v3.0',
+    contents: Object
+}
+```
+
+When `false`, it will produce this one:
+```javascript
+{
+    base: '/',
+    cwd: '/',
+    stat: Object,
+    path: '/myscript.js',
+    contents: Object
+}
+```
 
 ## License
 
