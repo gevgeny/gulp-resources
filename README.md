@@ -155,6 +155,34 @@ After running the task you will have such html:
 </html>
 ```
 
+It also supports resources with query parameters:
+
+```html
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link href="css/**/*.css?key=A34-12s" rel="stylesheet" type="text/css">
+    <script src="scripts/vendor/script1.js?v=3.0"></script>
+    <script src="scripts/modules/**/*.js?z=As42"></script>
+</head>
+<body>
+    <p>gulp-resources example</p>
+</body>
+</html>
+```
+
+In this case the vinyl files path property will contain query parameters, so if you need to read the file from `file.path` property, remove the query parameters before:
+
+```javascript
+function readFileContents(file) {
+    var queryIdx = file.path.indexOf('?');
+    queryIdx = queryIdx < 0 ? file.path.length : queryIdx;
+    return fs.readFileSync(file.path.substring(0, queryIdx)).toString('utf8');
+}
+```
+
 ## API
 
 ### resources(options)
