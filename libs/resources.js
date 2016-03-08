@@ -50,10 +50,10 @@ module.exports = function (content, opts, contentDir) {
         if (opts.js && $element.is('script') && $element.attr('src')) {
             resources = resources.concat(expandResources($element.attr('src'), opts, contentDir));
         }
-        if (opts.css && $element.is('link') && ($element.attr('href') || '').substr(-4) === ".css") {
+        if (opts.css && $element.is('link') && ($element.attr('href') || '').indexOf(".css") >= 0) {
             resources = resources.concat(expandResources($element.attr('href'), opts, contentDir));
         }
-        if (opts.less && $element.is('link') && ($element.attr('href') || '').substr(-5) === ".less") {
+        if (opts.less && $element.is('link') && ($element.attr('href') || '').indexOf(".less") >= 0) {
             resources = resources.concat(expandResources($element.attr('href'), opts, contentDir));
         }
         if (opts.favicon && $element.is('link') && ($element.attr('rel') || '') === "icon") {
