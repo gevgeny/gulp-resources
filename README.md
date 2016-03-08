@@ -155,6 +155,34 @@ After running the task you will have such html:
 </html>
 ```
 
+It also supports resources with query parameters:
+
+```html
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link href="css/**/*.css?key=A34-12s" rel="stylesheet" type="text/css">
+    <script src="scripts/vendor/script1.js?v=3.0"></script>
+    <script src="scripts/modules/**/*.js?z=As42"></script>
+</head>
+<body>
+    <p>gulp-resources example</p>
+</body>
+</html>
+```
+
+When `appendQueryToPath` option is `true` (`false` by default), vinyl files path property will contain query parameters, so if you need to read the file from `file.path` property, remove the query parameters before:
+
+```javascript
+function readFileContents(file) {
+    var queryIdx = file.path.indexOf('?');
+    queryIdx = queryIdx < 0 ? file.path.length : queryIdx;
+    return fs.readFileSync(file.path.substring(0, queryIdx)).toString('utf8');
+}
+```
+
 ## API
 
 ### resources(options)
@@ -202,6 +230,32 @@ Type: `Boolean`
 Default: `false`
 
 Specify whether to skip errors when resource files were not found.
+
+#### options.appendQueryToPath
+Type: `Boolean` 
+Default: `false`
+
+Append query to `file.path` if exists. When `true`, `<script src="myscript.js?v3.0"></script>` will produce this vinyl file:
+```javascript
+{
+    base: '/',
+    cwd: '/',
+    stat: Object,
+    path: '/myscript.js?v3.0',
+    contents: Object
+}
+```
+
+When `false`, it will produce this one:
+```javascript
+{
+    base: '/',
+    cwd: '/',
+    stat: Object,
+    path: '/myscript.js',
+    contents: Object
+}
+```
 
 ## License
 

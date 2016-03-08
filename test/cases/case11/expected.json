@@ -1,0 +1,13 @@
+[
+    "/*style1.css content*/",
+    "/*style2.css content*/",
+    "/*style3.css content*/",
+    "/*less.less content*/",
+    "// another-script.js content",
+    "// script1.js content",
+    "// script2.js content",
+    "// script3.js content",
+    "// script4.js content",
+    "// script5.js content",
+    "<!DOCTYPE html>\n<html>\n<head lang=\"en\">\n    <meta charset=\"UTF-8\">\n    <title></title>\n\n\t<link href=\"styles/*.css?v=1.0\" rel=\"stylesheet\" type=\"text/css\">\n\n    <link href=\"styles/less.less?v=1.0\" rel=\"stylesheet\" type=\"text/css\">\n\n    <script src=\"scripts1/**/*.js?v=1.0\"></script>\n    <script src=\"scripts2/script4.js?v=1.0\"></script>\n    <script src=\"scripts2/script5.js?v=1.0\"></script>\n    <script>\n        console.log(\"inline script should not be touched\");\n    </script>\n</head>\n<body>\n    <span>&quot;</span>\n</body>\n</html>"
+]

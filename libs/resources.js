@@ -7,7 +7,14 @@ var cheerio = require('cheerio'),
 
 var expandResources = function (resourcePath, opts, contentDir) {
     var resources = undefined,
-        dirs = [contentDir];
+        dirs = [contentDir],
+        queryIdx = resourcePath.indexOf('?'),
+        query = "";
+
+    if (queryIdx > -1) {
+       query = resourcePath.substr(queryIdx);
+       resourcePath = resourcePath.substring(0, queryIdx);
+    }
 
     if (typeof opts.cwd === 'string') {
         dirs.push(path.resolve(opts.cwd));
@@ -22,7 +29,7 @@ var expandResources = function (resourcePath, opts, contentDir) {
     _.forEach(dirs, function (dir) {
         resources = glob.sync(resourcePath, { cwd : dir });
         if (resources.length) {
-            resources = resources.map(function (resource) { return path.join(dir, resource) });
+            resources = resources.map(function (resource) { return path.join(dir, resource) + query });
             return false;
         }
     });
@@ -43,10 +50,10 @@ module.exports = function (content, opts, contentDir) {
         if (opts.js && $element.is('script') && $element.attr('src')) {
             resources = resources.concat(expandResources($element.attr('src'), opts, contentDir));
         }
-        if (opts.css && $element.is('link') && ($element.attr('href') || '').substr(-4) === ".css") {
+        if (opts.css && $element.is('link') && ($element.attr('href') || '').indexOf(".css") >= 0) {
             resources = resources.concat(expandResources($element.attr('href'), opts, contentDir));
         }
-        if (opts.less && $element.is('link') && ($element.attr('href') || '').substr(-5) === ".less") {
+        if (opts.less && $element.is('link') && ($element.attr('href') || '').indexOf(".less") >= 0) {
             resources = resources.concat(expandResources($element.attr('href'), opts, contentDir));
         }
         if (opts.favicon && $element.is('link') && ($element.attr('rel') || '') === "icon") {
