@@ -131,9 +131,6 @@ describe('gulp-resources', function () {
             .pipe(resources())
             .pipe(toArray(actual))
             .on('finish', function () {
-                console.log(actual);
-                console.log();
-                console.log(expected);
                 assert.deepEqual(actual, expected);
                 cb();
             });
