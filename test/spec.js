@@ -6,7 +6,9 @@ var assert = require("assert"),
 
 var toArray = function (buffer) {
     return through.obj(function (file, enc, cb) {
-        buffer.push(fs.readFileSync(file.path).toString('utf8'));
+        var queryIdx = file.path.indexOf('?');
+        queryIdx = queryIdx < 0 ? file.path.length : queryIdx;
+        buffer.push(fs.readFileSync(file.path.substring(0, queryIdx)).toString('utf8'));
         cb();
     });
 };
@@ -119,6 +121,19 @@ describe('gulp-resources', function () {
             .pipe(resources({ src: false, cwd: ['./test/cases/case10/another-dir1','./test/cases/case10/another-dir2'] }))
             .pipe(toArray(actual))
             .on('finish', function () {
+                assert.deepEqual(actual, expected);
+                cb();
+            });
+    });
+    it('should extract js, css, less resources and return source file itself with default opts', function (cb) {
+        var actual = [], expected = getExpected('case11');
+        gulp.src('./test/cases/case11/content.html')
+            .pipe(resources())
+            .pipe(toArray(actual))
+            .on('finish', function () {
+                console.log(actual);
+                console.log();
+                console.log(expected);
                 assert.deepEqual(actual, expected);
                 cb();
             });
