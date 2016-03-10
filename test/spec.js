@@ -136,5 +136,3 @@ describe('gulp-resources', function () {
             });
     });
 });
-
-//fs.writeFileSync('./test/cases/case1/expected.json', JSON.stringify(actual, null, 4));
