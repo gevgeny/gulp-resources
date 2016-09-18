@@ -26,6 +26,9 @@ var expandResources = function (resourcePath, opts, contentDir) {
         throw new gutil.PluginError('gulp-resources', 'Unknown type of "cwd".');
     }
 
+    // Strip slash from beginning of the path if exists
+    resourcePath = resourcePath.indexOf("/") === 0 ? resourcePath.slice(1) : resourcePath;
+    
     _.forEach(dirs, function (dir) {
         resources = glob.sync(resourcePath, { cwd : dir });
         if (resources.length) {
